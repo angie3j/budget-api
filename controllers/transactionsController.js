@@ -1,27 +1,27 @@
 // Dependencies
-const { response } = require('express');
 const express = require('express');
 
 // A new controller that handles a sub-route.
 const transactions = express.Router();
 
 // Files
-const transactionsArray = require('../models/transactions');
+const transactionsData = require('../models/transactions');
 
 // ROUTES
 
 // SENDS the transactions array:
+// INDEX
 transactions.get('/', (request, response) => {
     // console.log ('GET request to /transactions');
-    response.json(transactionsArray);
+    response.json(transactionsData);
 });
 
 // SHOW 
 // Sends the corresponding log when a valid id is given
 transactions.get('/:id', (request, response) => {
-    const id = request.params.id;
-    if(transactionsArray[arrayId]) {
-        response.json(transactionsArray[arrayId]);
+    const arrayId = request.params.id;
+    if(transactionsData[arrayId]) {
+        response.json(transactionsData[arrayId]);
 // Sends a redirect when an individual id is given: 
     } else {
         response.redirect('/', 302);
@@ -32,32 +32,26 @@ transactions.get('/:id', (request, response) => {
 // Adds a new transaction to the end of the transaction's array:
 transactions.post('/', (request, response) => {
     const newTransaction = request.body;
-    transactionsArray.push(newTransaction)
+    transactionsData.push(newTransaction)
     // console.log(newTransaction)
-    response.json(transactionsArray);
-    response.send(request.body);
+    response.json(transactionsData);
+    // response.send(request.body);
 });
+
 
 // DELETE
-// Deletes at the id in the transaction's array:
-transactions.delete('/:id', (request, response) => {
-    const { id } = request.params;
-    // console.log(transactionsArray)
-    if(transactionsArray[id]) {
-        //transactionsArray.filter( transactions, i) => id !== i )
-        const deletedTransaction = transactionsArray.splice(index, 1)[0]
-        response.status(200).json(deletedTransaction);
-    } else {
-        response.status(404).json({ error: 'Page Not Found'})
-    };
-});
-
+transactions.delete("/:arrayId", (req, res) => {
+    const deletedTransaction = transactionsData.splice(req.params.arrayId, 1);
+    //console.log(req.params.arrayId);
+    res.status(200).json(deletedTransaction);
+  });
+  
 // UPDATE 
 // Replaces the index in the transactions' array:
 transactions.put('/:id', (request, response) => {
     const arrayId = request.params;
-    transactionsArray[arrayId] = request.body;
-    response.status(404).json(transactionsArray[arrayId]);
+    transactionsData[arrayId] = request.body;
+    response.status(404).json(transactionsData[arrayId]);
 });
 
 

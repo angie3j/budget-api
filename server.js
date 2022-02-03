@@ -1,6 +1,5 @@
 // Dependencies
 const dotenv = require('dotenv');
-const { application } = require('express');
 
 // Pull in app.js
 const app = require('./app');
