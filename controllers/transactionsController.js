@@ -51,7 +51,7 @@ transactions.delete("/:arrayId", (req, res) => {
 transactions.put('/:id', (request, response) => {
     const arrayId = request.params;
     transactionsData[arrayId] = request.body;
-    response.status(404).json(transactionsData[arrayId]);
+    response.status(200).json(transactionsData[arrayId]);
 });
 
 
