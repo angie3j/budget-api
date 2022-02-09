@@ -49,8 +49,9 @@ transactions.delete("/:arrayId", (req, res) => {
 // UPDATE 
 // Replaces the index in the transactions' array:
 transactions.put('/:id', (request, response) => {
-    const arrayId = request.params;
+    const arrayId= request.params.id;
     transactionsData[arrayId] = request.body;
+    console.log('success')
     response.status(200).json(transactionsData[arrayId]);
 });
 
